@@ -154,7 +154,7 @@ El funcionamiento del sensor DHT11 es relativamente sencillo:
 
 * Para utilizar un sensor DHT11 con Arduino, hay una libreria para facilitar la lectura de datos del sensor. La librería "DHT.h" proporciona funciones que permiten leer la temperatura y la humedad del sensor DHT11.
 
-* Además de eso en el kit proporcionado por la universidad podemos encontrar el mismo sensor con difernetes consexiones, en mi caso me toco el de la derecha, que tiene 3 patas correspondientes a pin de datos, voltaje(VCC) y tierra(GND) respectivamente
+* Además de eso en el kit proporcionado por la universidad podemos encontrar el mismo sensor con difernetes consexiones, en mi caso me toco el de la izquierda, que tiene 3 patas correspondientes a pin de datos, voltaje(VCC) y tierra(GND) respectivamente
 
   ![image](https://github.com/cescarcena2021/Controlador-Maquina-Expendedora/assets/102520602/9e8591f4-ed27-4f15-a356-ec3057f83339)
 
