@@ -93,6 +93,74 @@ La práctica debe implementar la siguiente funcionalidad software.
 *  Mantén tu código seguro utilizando el watchdog para evitar bloqueos.
 
 Entrega definida en aula virtual.
+
+
+## Funcionamiento de los sensores
+
+### Ultrasonido
+El funcionamiento básico del sensor de ultrasonido HC-SR04 con Arduino implica los siguientes pasos:
+
+* Generación de un pulso ultrasónico: El Arduino envía una señal de pulso corto al pin de trigger (gatillo) del sensor HC-SR04. Este pulso de trigger es necesario para iniciar la medición de distancia.
+
+* Emisión de ondas ultrasónicas: Cuando el pin de trigger recibe el pulso, el sensor envía una ráfaga de ondas ultrasónicas a través del transmisor ultrasónico.
+
+* Recepción de las ondas reflejadas: Estas ondas rebotan en el objeto más cercano y son detectadas por el receptor ultrasónico del sensor.
+
+* Cálculo de la distancia: El sensor calcula la distancia entre él y el objeto midiendo el tiempo que tarda en recibir las ondas ultrasónicas reflejadas. Utilizando la fórmula de distancia = velocidad × tiempo / 2 (ya que la onda va y viene), se estima la distancia.
+
+![image](https://github.com/cescarcena2021/Controlador-Maquina-Expendedora/assets/102520602/8ed6505c-8bf7-4985-8aef-da9cbafd7fdf)
+
+* Lectura de la distancia por Arduino: El Arduino lee la duración del pulso de eco que recibe del pin de eco del sensor y, mediante cálculos, convierte esta duración en una distancia.
+``` Arduino
+void setup() {
+  Serial.begin(9600);
+  pinMode(Trigger, OUTPUT);
+  pinMode(Echo, INPUT);
+}
+
+void loop() {
+  long tiempo_echo, distancia;
+  
+  //lanzar el trigger
+    digitalWrite(Trigger, HIGH);
+    delayMicroseconds(10);          //Enviamos un pulso de 10us
+    digitalWrite(Trigger, LOW);
+    
+    tiempo_echo = pulseIn(Echo, HIGH); 
+    distancia = tiempo_echo/59;  //distancia en cm
+```
+  
+### Joystick
+
+El joystick generalmente está conectado a través de varios pines a una placa Arduino. Los dos potenciómetros están conectados a dos pines analógicos (por ejemplo, A0 y A1), y el botón de presión central, si lo tiene, se conecta a un pin digital.
+
+El funcionamiento básico de un joystick en Arduino implica leer los valores analógicos proporcionados por los potenciómetros para determinar la posición del joystick en los ejes X e Y, y leer el estado del botón (si está presente) para detectar si ha sido presionado o no.
+
+![image](https://github.com/cescarcena2021/Controlador-Maquina-Expendedora/assets/102520602/c812112d-59b6-4c19-96a0-068abace7720)
+
+### Display LCD
+Un LCD (Liquid Crystal Display) conectado a Arduino permite mostrar información de texto y/o gráficos de una manera legible y visualmente clara. El funcionamiento básico implica enviar comandos y datos al LCD para controlar qué se muestra en la pantalla. Para trabajar con un LCD en Arduino, se utiliza una librería como "LiquidCrystal.h" que facilita el control del LCD.
+
+![image](https://github.com/cescarcena2021/Controlador-Maquina-Expendedora/assets/102520602/89ede3c4-ae6e-4617-ad35-28c362c40f30)
+
+### Sensor temperatura/Humedad DHT11
+El funcionamiento del sensor DHT11 es relativamente sencillo:
+
+* Medición de la temperatura: El termistor dentro del sensor detecta cambios de resistencia en función de la temperatura ambiente. Esta variación de resistencia se convierte en una señal digital que el sensor DHT11 puede leer.
+
+* Medición de la humedad: El sensor de humedad capacitivo mide la variación en la capacitancia del material sensible a la humedad dentro del sensor. Esta variación se convierte en una señal digital que indica el nivel de humedad.
+
+* Salida de datos: El sensor DHT11 convierte las mediciones analógicas de temperatura y humedad en señales digitales que se pueden leer a través de un solo pin de datos. Utiliza un protocolo propio para comunicar estos datos al microcontrolador al que está conectado (como Arduino).
+
+* Para utilizar un sensor DHT11 con Arduino, hay una libreria para facilitar la lectura de datos del sensor. La librería "DHT.h" proporciona funciones que permiten leer la temperatura y la humedad del sensor DHT11.
+
+* Además de eso en el kit proporcionado por la universidad podemos encontrar el mismo sensor con difernetes consexiones, en mi caso me toco el de la derecha, que tiene 3 patas correspondientes a pin de datos, voltaje(VCC) y tierra(GND) respectivamente
+
+  ![image](https://github.com/cescarcena2021/Controlador-Maquina-Expendedora/assets/102520602/9e8591f4-ed27-4f15-a356-ec3057f83339)
+
+
+
+
 ### Documentación:
 
 * https://www.arduino.cc/reference/en/
