@@ -17,17 +17,17 @@ Sistema empotrados y de tiempo real
 La práctica debe implementar la siguiente funcionalidad software.
   1. Arranque:
      
-      - Al inicio del sistema, el LED1 debe parpadear 3 veces a intervalos de 1 segundo.
+      1.1 Al inicio del sistema, el LED1 debe parpadear 3 veces a intervalos de 1 segundo.
       Al mismo tiempo debe mostrarse el mensaje “CARGANDO …” en el LCD. Al
       cabo de los 3 parpadeos el LED1 debe apagarse y la pantalla debe mostrar la
       información de la funcionalidad “Servicio”.
   
   2. Servicio.
   
-      - Si el usuario se encuentra a menos de 1 metro de la máquina se debe pasar al
+      2.1 Si el usuario se encuentra a menos de 1 metro de la máquina se debe pasar al
       estado b). En caso contrario el LCD debe mostrar “ESPERANDO CLIENTE”.
       
-      - El LCD debe mostrar la temperatura y humedad durante 5 segundos y acto
+      2.2 El LCD debe mostrar la temperatura y humedad durante 5 segundos y acto
       seguido deberá mostrar la lista de productos que el usuario puede seleccionar.
       Los productos y precios a mostrar son:
       
@@ -52,14 +52,14 @@ La práctica debe implementar la siguiente funcionalidad software.
   
   3. Admin
      
-      - Es posible acceder a la interfaz de administración de la máquina en cualquier
+      3.1 Es posible acceder a la interfaz de administración de la máquina en cualquier
       momento. Para ello el usuario debe presionar el botón durante no menos de 5
       segundos.
       
-      - Mientras el usuario esté en la vista de Admin, ambos LEDS deben estar
+      3.2 Mientras el usuario esté en la vista de Admin, ambos LEDS deben estar
       encendidos.
       
-      - El siguiente menú debe ser mostrado en el LCD:
+      3.3 El siguiente menú debe ser mostrado en el LCD:
       
       * i. Ver temperatura
       * ii. Ver distancia sensor
@@ -85,7 +85,7 @@ La práctica debe implementar la siguiente funcionalidad software.
       funcionalidad 2a) deberías ver los precios actualizados. (Los precios no
       persisten si la placa se reinicia).
       
-      - Para salir de la vista admin se debe pulsar de nuevo el pulsador durante no
+      3.4 Para salir de la vista admin se debe pulsar de nuevo el pulsador durante no
       menos de 5 segundos, volviendo a la funcionalidad de Servicio.
 
 ### Recomendaciones
