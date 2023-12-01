@@ -158,8 +158,8 @@ El funcionamiento del sensor DHT11 es relativamente sencillo:
 
   ![image](https://github.com/cescarcena2021/Controlador-Maquina-Expendedora/assets/102520602/9e8591f4-ed27-4f15-a356-ec3057f83339)
 
-
-
+### Implemantación 
+Para hacer esta practica, en primer lugar decidí hacer un esquema de como seria le circuito, a si que decidí hacer un sketch en Fritzing
 
 ### Documentación:
 
