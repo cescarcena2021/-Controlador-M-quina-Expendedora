@@ -218,7 +218,32 @@ void botonInterrupcion(){
   }
 }
 ```
-
+Para el menu de adminsitrador tambien he usado una estructuctura *switch case* pero esta vez en vez de con las posobles posiciones del joystick, con las posibles opciones del menu de admunistrador. De este modo he consegido poder estar dntro de la misma opcion dirante el tiempo que queramos sin parar el ciclo del bucle principal. Para salir de la opcion seleciona solo basta con mover el joystick a la izquierda y la variable *salir* se pondra a false para que no se ejecute el *switch case*. 
+```c++
+if(!salir){
+      switch(current_choice){
+        case ver_temperatura_:
+          ignore = true;
+          ver_temperatura();
+          break;
+        case ver_sensor_dist_:
+          ignore = true;
+          ver_sensor_distancia();
+          break;
+        case ver_contador_:
+          ignore = true;
+          ver_contador();
+          break;
+        case modificar_precios_:
+          modificar_precios();
+          break;
+        default: 
+          break;
+      }
+    }else{
+      show_admin_menu(current_choice);
+    }
+```
 ### Documentación:
 
 * https://www.arduino.cc/reference/en/
