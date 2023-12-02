@@ -240,6 +240,10 @@ void loop(){
   wdt_reset();
 }
 ```
+
+## Video demostrativo 
+En el siguiente video se puede ver perfectamente el funcionamiento completo de la maquina entrando en los diferentes menus y y difrentes opciones.
+
 ### Documentación:
 
 * https://www.arduino.cc/reference/en/
