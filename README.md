@@ -58,6 +58,40 @@ El funcionamiento básico de un joystick en Arduino implica leer los valores ana
 
 ![image](https://github.com/cescarcena2021/Controlador-Maquina-Expendedora/assets/102520602/c812112d-59b6-4c19-96a0-068abace7720)
 
+Para leer los datos de este sensor y traducirlos a movimiento he creado la siguiente funcion:
+
+```c++
+int leer_joistick(){
+  //izquierda [0], derecha [1]
+  //arriba [2], abajo [3]
+  //boton pulsado [4]
+
+  int VRx = analogRead(Pin_x);
+  int VRy = analogRead(Pin_y);
+
+  int R3 = digitalRead(joistick_Button);
+
+  if(R3 != 1){
+    return enter;  //boton pulsado
+  }
+  
+  if(VRx > 700){
+    return up;  //arriba
+  }else if(VRx < 200){
+    return down; //abajo
+  }
+
+  if(VRy > 700){
+    return right;  //izquierda
+  }else if(VRy < 200){
+    return left;  //derecha
+  };
+
+  return -1;
+  
+}
+```
+
 ### Display LCD
 Un LCD (Liquid Crystal Display) conectado a Arduino permite mostrar información de texto y/o gráficos de una manera legible y visualmente clara. El funcionamiento básico implica enviar comandos y datos al LCD para controlar qué se muestra en la pantalla. Para trabajar con un LCD en Arduino, se utiliza una librería como "LiquidCrystal.h" que facilita el control del LCD.
 
