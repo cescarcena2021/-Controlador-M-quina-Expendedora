@@ -161,10 +161,66 @@ Para ellos utilice alunos de los legos que tenia por casa y me puse manos a la o
 ![image](https://github.com/cescarcena2021/Controlador-Maquina-Expendedora/assets/102520602/ff1acc87-a9e5-44fc-b7b7-2e78835186db)
 ![image](https://github.com/cescarcena2021/Controlador-Maquina-Expendedora/assets/102520602/2d77b338-f76f-4186-a007-d05b1d96fc12)
 
-### Documentación:
+### Código
 
+Para la parte software de esta practica comece haciendo un esquema a mano de como seria la estructurta principal del codigo y que pines tenia que conectar en que sitios ya que estaban muy justos. Una vez logre terminar el boceto me puse manos a la obra definiendo las constantes y crando las principales funciones de lectura de datos de los sensores como por ejemplo **ver_temperatura()** o **ver_distancia()**. Mas tarde añadí la navegacion por el menu de productos, para el cual use una pequeña *struct* que me definí para que me fuera mas facil. Tambien inicialice todo debidamente en el *setup()*.
+```Arduino
+struct Producto{
+  float precio;
+  String modelo;
+};
+```
+
+Para el bucle principal use una estructura *switch case* en la cual en funcion de las lectura del joystick entratiamos en un lugar o en otro. Además de eso he usado varios condicionales para saber si la maquina necesita imprimir el menu de usuario o el de administrador, para saber si el cliente se encuentra cerca o para saber si la maquina se encuantra en estado de arranque. Tambien decidi añadir trazas en varios sitios para que en un futuro si la maquina se rompe, la depuracion se mas facil.
+```Arduino
+choice = leer_joistick();
+  //Serial.println(choice);
+  if(choice != last_choice){
+    lcd.clear();
+    last_choice = choice;
+    switch(choice){
+      case up:
+        move_up();
+        Serial.println("up");
+        break;
+      case down:
+        move_down();
+        Serial.println("down");
+        break;
+      case left:
+        move_left();
+        Serial.println("left");
+        break;
+      case enter:
+        press_button();
+        Serial.println("button");
+        break;
+      default: 
+        break;
+    }
+```
+Para entar el es modo adminitrador y para reinicir la maquina era necesario hacer uso de las pulsaciones de un boton en cualquier momento y estado de la maquina. Así que decidí usar las interupciones para ello. Genere un interrupcion que saltara cuando el boton cambia de estado y si este esta siendo presionado guarda el tiempo de inicio de la pulsacion, y si justo se acaba de soltar gurada el tiempo del final de la pusacion. Con estos dos valores somos capaces de calcular el tiempo de la puslacion y con ello ya podremos decidir si queremos reiniciar la maquina(entre 2 y 3 segundos) o si quermos entrar en el estado de adminsitrador(mas de 5 segundos). Ademas añadi un condicional al comienzo para eliminar las falsas pulsaciones.
+```Arduino
+void botonInterrupcion(){
+
+  //eliminamos el rebote
+  if (millis() - startTime > timeThreshold)
+  {
+    startTime = millis();
+
+    if (digitalRead(Pin_Button) == LOW) { // Verifica si el botón está siendo pulsado
+      Inicio = millis(); // Guarda el tiempo en el que se inició la pulsación
+    }
+    if (digitalRead(Pin_Button) == HIGH) { // Verifica si el botón se ha dejado de pulsar
+      Final = millis(); // Guarda el tiempo del final de la pulsación
+    }
+    total = Final - Inicio;
+  }
+}
+```
+
+### Documentación:
 * https://www.arduino.cc/reference/en/
-  
 Bibliotecas utilizadas:
 
 * LiquidCrystal: https://www.arduino.cc/en/Reference/LiquidCrystal
