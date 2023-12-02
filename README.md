@@ -13,7 +13,7 @@ Sistema empotrados y de tiempo real
   * Boton
   * 2 LEDS Normales (LED1, LED2)
 
-[Enunciado de la practica](https://www.aulavirtual.urjc.es/moodle/pluginfile.php/12242778/mod_resource/content/4/Practica3_MaquinaExpendedora.pdf)
+[Enunciado de la practica](https://github.com/cescarcena2021/Controlador-Maquina-Expendedora/blob/master/Practica3_MaquinaExpendedora.pdf)
 
 
 ## Funcionamiento de los sensores
