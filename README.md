@@ -103,7 +103,7 @@ El funcionamiento básico del sensor de ultrasonido HC-SR04 con Arduino implica 
 ![image](https://github.com/cescarcena2021/Controlador-Maquina-Expendedora/assets/102520602/8ed6505c-8bf7-4985-8aef-da9cbafd7fdf)
 
 * Lectura de la distancia por Arduino: El Arduino lee la duración del pulso de eco que recibe del pin de eco del sensor y, mediante cálculos, convierte esta duración en una distancia.
-``` Arduino
+```c++
 void setup() {
   Serial.begin(9600);
   pinMode(Trigger, OUTPUT);
@@ -164,7 +164,7 @@ Para ellos utilice alunos de los legos que tenia por casa y me puse manos a la o
 ### Código
 
 Para la parte software de esta practica comece haciendo un esquema a mano de como seria la estructurta principal del codigo y que pines tenia que conectar en que sitios ya que estaban muy justos. Una vez logre terminar el boceto me puse manos a la obra definiendo las constantes y crando las principales funciones de lectura de datos de los sensores como por ejemplo **ver_temperatura()** o **ver_distancia()**. Mas tarde añadí la navegacion por el menu de productos, para el cual use una pequeña *struct* que me definí para que me fuera mas facil. Tambien inicialice todo debidamente en el *setup()*.
-```Arduino
+```c++
 struct Producto{
   float precio;
   String modelo;
@@ -172,7 +172,7 @@ struct Producto{
 ```
 
 Para el bucle principal use una estructura *switch case* en la cual en funcion de las lectura del joystick entratiamos en un lugar o en otro. Además de eso he usado varios condicionales para saber si la maquina necesita imprimir el menu de usuario o el de administrador, para saber si el cliente se encuentra cerca o para saber si la maquina se encuantra en estado de arranque. Tambien decidi añadir trazas en varios sitios para que en un futuro si la maquina se rompe, la depuracion se mas facil.
-```Arduino
+```c++
 choice = leer_joistick();
   //Serial.println(choice);
   if(choice != last_choice){
@@ -200,7 +200,7 @@ choice = leer_joistick();
     }
 ```
 Para entar el es modo adminitrador y para reinicir la maquina era necesario hacer uso de las pulsaciones de un boton en cualquier momento y estado de la maquina. Así que decidí usar las interupciones para ello. Genere un interrupcion que saltara cuando el boton cambia de estado y si este esta siendo presionado guarda el tiempo de inicio de la pulsacion, y si justo se acaba de soltar gurada el tiempo del final de la pusacion. Con estos dos valores somos capaces de calcular el tiempo de la puslacion y con ello ya podremos decidir si queremos reiniciar la maquina(entre 2 y 3 segundos) o si quermos entrar en el estado de adminsitrador(mas de 5 segundos). Ademas añadi un condicional al comienzo para eliminar las falsas pulsaciones.
-```Arduino
+```c++
 void botonInterrupcion(){
 
   //eliminamos el rebote
@@ -243,6 +243,40 @@ if(!salir){
     }else{
       show_admin_menu(current_choice);
     }
+```
+
+Finalmente para hacer mas robusto el codigo he añadido un watchdog. Este lo inicializmos en el *setup()* a 8 segundos y lo resetamos al final del *loop()*. Ademas tambien es necesario reciniarlo en la funcion del led progresivo, ya que este hace un delay entre 4 y 8 y es possible que se reinice cuando no deberia en ese caso, por es justo despues de salir del *for* que enciende el led, cuando volvemos a reseatear el watchdog.
+```c++
+void setup() {
+  //Inicializar el watchdog
+  wdt_disable();
+  wdt_enable(WDTO_8S);
+}
+...
+
+void progresive_led(int time_){
+
+  //encender progresivamente
+  for (int brillo = 0; brillo <= 255; brillo++) {
+    analogWrite(ledVerde, brillo);
+    delay(time_ / 256); 
+  }
+
+  //Cuando termina apaga el led y reseatamos el wdt para que no salte 
+  analogWrite(ledVerde, LOW);
+  wdt_reset();
+}
+
+...
+
+void loop(){
+
+  ...
+
+  //al final de bucle resetamos para que no salte el watchdog
+  delay(100);
+  wdt_reset();
+}
 ```
 ### Documentación:
 
