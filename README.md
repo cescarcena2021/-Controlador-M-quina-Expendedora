@@ -220,7 +220,9 @@ void botonInterrupcion(){
 ```
 
 ### Documentación:
+
 * https://www.arduino.cc/reference/en/
+  
 Bibliotecas utilizadas:
 
 * LiquidCrystal: https://www.arduino.cc/en/Reference/LiquidCrystal
