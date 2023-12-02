@@ -88,15 +88,7 @@ La práctica debe implementar la siguiente funcionalidad software.
       3.4 Para salir de la vista admin se debe pulsar de nuevo el pulsador durante no
       menos de 5 segundos, volviendo a la funcionalidad de Servicio.
 
-### Recomendaciones
-* Haz uso de todas las librerías y técnicas vistas en clase.
-*  Mantén tu código seguro utilizando el watchdog para evitar bloqueos.
-
-Entrega definida en aula virtual.
-
-
 ## Funcionamiento de los sensores
-
 ### Ultrasonido
 El funcionamiento básico del sensor de ultrasonido HC-SR04 con Arduino implica los siguientes pasos:
 
@@ -159,9 +151,15 @@ El funcionamiento del sensor DHT11 es relativamente sencillo:
   ![image](https://github.com/cescarcena2021/Controlador-Maquina-Expendedora/assets/102520602/9e8591f4-ed27-4f15-a356-ec3057f83339)
 
 ### Implemantación 
-Para hacer esta practica, en primer lugar decidí hacer un esquema de como seria le circuito, a si que decidí hacer un sketch en Fritzing
+Para hacer esta practica, en primer lugar decidí hacer un esquema de como seria le circuito, a si que decidí hacer un sketch en Fritzing. Tube algunos problemas al principo ya que no disponia de pines digitales suficientes para conectar todos los sensores, a si que decidi conectar uno de los led a un pin analogico. Esto es poslible ya que este es capaz de recivir señales analogicas y justo ese led nu requiere de **pulse width modulation** (PWM). Ademas, otro de los problemas que tube fu respecto al sensor de temeratura que el que yo tenia no seguia el esquma de pines combencional y tarde bastante haste que descubri que el problema no estaba en el sensor ni el codigo si no en la conexion de los pines
 ![image](https://github.com/cescarcena2021/Controlador-Maquina-Expendedora/assets/102520602/eeb1fbeb-c230-45fb-bf0b-6490b5d89b53)
-*   
+
+### Chasis 
+Esta practica requiere de varios sensores y varios de ellos son interactuables como el boton o el joystick,. Mi escasa experiencia en arduino me decia que cada vez que quisiare depurar la practca y usara cualquiera de estos interactuables, por error algun cable se soltaría y tardaria horas en saber donde estaba conactado. Para evitar estos problemas se me ocurrio construir un chasis que encapsulara todos los sensores y consexiones y dejara una fachada muscho mas elegante de cara el usuario.
+Para ellos utilice alunos de los legos que tenia por casa y me puse manos a la obra. Anclé tanto la protoboard como la placa de Arduino a la base y genere unas parades de poco tamaño para que todo estubiera seguro. Mas tarde comence a realizar las conexiones y a colocar los sensores en sus corespondientes posiciones. Una vez terminada toda la parte electronica continue con la contrucion del chasis para que la maquina quedara totalmente sellada. Mas tarde añadi una entrada para conetar la placa a corriente y un pulsador que se conecta con el boton. Y finalmente este fue el resultado final..
+
+![image](https://github.com/cescarcena2021/Controlador-Maquina-Expendedora/assets/102520602/ff1acc87-a9e5-44fc-b7b7-2e78835186db)
+![image](https://github.com/cescarcena2021/Controlador-Maquina-Expendedora/assets/102520602/2d77b338-f76f-4186-a007-d05b1d96fc12)
 
 ### Documentación:
 
