@@ -113,19 +113,18 @@ El funcionamiento del sensor DHT11 es relativamente sencillo:
   ![image](https://github.com/cescarcena2021/Controlador-Maquina-Expendedora/assets/102520602/9e8591f4-ed27-4f15-a356-ec3057f83339)
 
 ### Implemantación 
-Para hacer esta practica, en primer lugar decidí hacer un esquema de como seria le circuito, a si que decidí hacer un sketch en Fritzing. Tube algunos problemas al principo ya que no disponia de pines digitales suficientes para conectar todos los sensores, a si que decidi conectar uno de los led a un pin analogico. Esto es poslible ya que este es capaz de recivir señales analogicas y justo ese led nu requiere de **pulse width modulation** (PWM). Ademas, otro de los problemas que tube fu respecto al sensor de temeratura que el que yo tenia no seguia el esquma de pines combencional y tarde bastante haste que descubri que el problema no estaba en el sensor ni el codigo si no en la conexion de los pines
+Para hacer esta práctica, en primer lugar decidí hacer un esquema de cómo sería el circuito, así que decidí hacer un sketch en Fritzing. Tuve algunos problemas al principio ya que no disponía de pines digitales suficientes para conectar todos los sensores, así que decidí conectar uno de los leds a un pin analógico. Esto es posible ya que este es capaz de recibir señales analógicas y justo ese led no requiere de *pulse width modulation* (PWM). Además, otro de los problemas que tuve fue respecto al sensor de temperatura, ya que el que yo tenía no seguía el esquema de pines convencional y tardé bastante hasta que descubrí que el problema no estaba en el sensor ni en el código, sino en la conexión de los pines
 ![image](https://github.com/cescarcena2021/Controlador-Maquina-Expendedora/assets/102520602/eeb1fbeb-c230-45fb-bf0b-6490b5d89b53)
 
 ### Chasis 
-Esta practica requiere de varios sensores y varios de ellos son interactuables como el boton o el joystick,. Mi escasa experiencia en arduino me decia que cada vez que quisiare depurar la practca y usara cualquiera de estos interactuables, por error algun cable se soltaría y tardaria horas en saber donde estaba conactado. Para evitar estos problemas se me ocurrio construir un chasis que encapsulara todos los sensores y consexiones y dejara una fachada muscho mas elegante de cara el usuario.
-Para ellos utilice alunos de los legos que tenia por casa y me puse manos a la obra. Anclé tanto la protoboard como la placa de Arduino a la base y genere unas parades de poco tamaño para que todo estubiera seguro. Mas tarde comence a realizar las conexiones y a colocar los sensores en sus corespondientes posiciones. Una vez terminada toda la parte electronica continue con la contrucion del chasis para que la maquina quedara totalmente sellada. Mas tarde añadi una entrada para conetar la placa a corriente y un pulsador que se conecta con el boton. Y finalmente este fue el resultado final..
+Esta práctica requiere de varios sensores y varios de ellos son interactivos como el botón o el joystick. Mi escasa experiencia en Arduino me decía que cada vez que quisiera depurar la práctica y usara cualquiera de estos interactivos, por error algún cable se soltaría y tardaría horas en saber dónde estaba conectado. Para evitar estos problemas se me ocurrió construir un chasis que encapsulara todos los sensores y conexiones y dejara una fachada mucho más elegante de cara al usuario. Para ello utilicé algunos de los Legos que tenía por casa y me puse manos a la obra. Anclé tanto la protoboard como la placa de Arduino a la base y generé unas paredes de poco tamaño para que todo estuviera seguro. Más tarde comencé a realizar las conexiones y a colocar los sensores en sus correspondientes posiciones. Una vez terminada toda la parte electrónica continué con la construcción del chasis para que la máquina quedara totalmente sellada. Más tarde añadí una entrada para conectar la placa a corriente y un pulsador que se conecta con el botón. Y finalmente este fue el resultado final..
 
 ![image](https://github.com/cescarcena2021/Controlador-Maquina-Expendedora/assets/102520602/ff1acc87-a9e5-44fc-b7b7-2e78835186db)
 ![image](https://github.com/cescarcena2021/Controlador-Maquina-Expendedora/assets/102520602/2d77b338-f76f-4186-a007-d05b1d96fc12)
 
 ### Código
 
-Para la parte software de esta practica comece haciendo un esquema a mano de como seria la estructurta principal del codigo y que pines tenia que conectar en que sitios ya que estaban muy justos. Una vez logre terminar el boceto me puse manos a la obra definiendo las constantes y crando las principales funciones de lectura de datos de los sensores como por ejemplo **ver_temperatura()** o **ver_distancia()**. Mas tarde añadí la navegacion por el menu de productos, para el cual use una pequeña *struct* que me definí para que me fuera mas facil. Tambien inicialice todo debidamente en el *setup()*.
+Para la parte software de esta práctica comencé haciendo un esquema a mano de cómo sería la estructura principal del código y qué pines tenía que conectar en qué sitios, ya que estaban muy justos. Una vez logré terminar el boceto me puse manos a la obra definiendo las constantes y creando las principales funciones de lectura de datos de los sensores como por ejemplo *ver_temperatura()* o *ver_distancia()*. Más tarde añadí la navegación por el menú de productos, para el cual usé una pequeña struct que me definí para que me fuera más fácil. También inicialicé todo debidamente en el *setup()*.
 ```c++
 struct Producto{
   float precio;
@@ -133,7 +132,7 @@ struct Producto{
 };
 ```
 
-Para el bucle principal use una estructura *switch case* en la cual en funcion de las lectura del joystick entratiamos en un lugar o en otro. Además de eso he usado varios condicionales para saber si la maquina necesita imprimir el menu de usuario o el de administrador, para saber si el cliente se encuentra cerca o para saber si la maquina se encuantra en estado de arranque. Tambien decidi añadir trazas en varios sitios para que en un futuro si la maquina se rompe, la depuracion se mas facil.
+Para el bucle principal usé una estructura switch case en la cual, en función de las lecturas del joystick, entraríamos en un lugar o en otro. Además de eso, he usado varios condicionales para saber si la máquina necesita imprimir el menú de usuario o el de administrador, para saber si el cliente se encuentra cerca o para saber si la máquina se encuentra en estado de arranque. También decidí añadir trazas en varios sitios para que en un futuro si la máquina se rompe, la depuración sea más fácil.
 ```c++
 choice = leer_joistick();
   //Serial.println(choice);
@@ -161,7 +160,8 @@ choice = leer_joistick();
         break;
     }
 ```
-Para entar el es modo adminitrador y para reinicir la maquina era necesario hacer uso de las pulsaciones de un boton en cualquier momento y estado de la maquina. Así que decidí usar las interupciones para ello. Genere un interrupcion que saltara cuando el boton cambia de estado y si este esta siendo presionado guarda el tiempo de inicio de la pulsacion, y si justo se acaba de soltar gurada el tiempo del final de la pusacion. Con estos dos valores somos capaces de calcular el tiempo de la puslacion y con ello ya podremos decidir si queremos reiniciar la maquina(entre 2 y 3 segundos) o si quermos entrar en el estado de adminsitrador(mas de 5 segundos). Ademas añadi un condicional al comienzo para eliminar las falsas pulsaciones.
+Para entrar en el modo administrador y para reiniciar la máquina era necesario hacer uso de las pulsaciones de un botón en cualquier momento y estado de la máquina. Así que decidí usar las interrupciones para ello. Generé una interrupción que saltara cuando el botón cambia de estado y si este está siendo presionado guarda el tiempo de inicio de la pulsación, y si justo se acaba de soltar guarda el tiempo del final de la pulsación. Con estos dos valores somos capaces de calcular el tiempo de la pulsación y con ello ya podremos decidir si queremos reiniciar la máquina (entre 2 y 3 segundos) o si queremos entrar en el estado de administrador (más de 5 segundos). Además, añadí un condicional al comienzo para eliminar las falsas pulsaciones.
+
 ```c++
 void botonInterrupcion(){
 
@@ -180,7 +180,7 @@ void botonInterrupcion(){
   }
 }
 ```
-Para el menu de adminsitrador tambien he usado una estructuctura *switch case* pero esta vez en vez de con las posobles posiciones del joystick, con las posibles opciones del menu de admunistrador. De este modo he consegido poder estar dntro de la misma opcion dirante el tiempo que queramos sin parar el ciclo del bucle principal. Para salir de la opcion seleciona solo basta con mover el joystick a la izquierda y la variable *salir* se pondra a false para que no se ejecute el *switch case*. 
+Para el menú de administrador también he usado una estructura switch case pero esta vez en vez de con las posibles posiciones del joystick, con las posibles opciones del menú de administrador. De este modo he conseguido poder estar dentro de la misma opción durante el tiempo que queramos sin parar el ciclo del bucle principal. Para salir de la opción seleccionada solo basta con mover el joystick a la izquierda y la variable salir se pondrá a false para que no se ejecute el switch case
 ```c++
 if(!salir){
       switch(current_choice){
@@ -207,7 +207,8 @@ if(!salir){
     }
 ```
 
-Finalmente para hacer mas robusto el codigo he añadido un watchdog. Este lo inicializmos en el *setup()* a 8 segundos y lo resetamos al final del *loop()*. Ademas tambien es necesario reciniarlo en la funcion del led progresivo, ya que este hace un delay entre 4 y 8 y es possible que se reinice cuando no deberia en ese caso, por es justo despues de salir del *for* que enciende el led, cuando volvemos a reseatear el watchdog.
+Finalmente, para hacer más robusto el código, he añadido un watchdog. Este lo inicializamos en el *setup()* a 8 segundos y lo reseteamos al final del *loop()*. Además, también es necesario reiniciarlo en la función del led progresivo, ya que este hace un delay entre 4 y 8, y es posible que se reinicie cuando no debería. En ese caso, es justo después de salir del *for* que enciende el led, cuando volvemos a resetear el watchdog.
+
 ```c++
 void setup() {
   //Inicializar el watchdog
