@@ -244,6 +244,7 @@ void loop(){
 
 ## Video demostrativo 
 En el siguiente video se puede ver perfectamente el funcionamiento completo de la maquina entrando en los diferentes menus y y difrentes opciones.
+https://youtu.be/lbYajS9Zx08
 
 ### Documentación:
 
